@@ -1,0 +1,502 @@
+/* Hide scrollbar while keeping scrolling functional */
+html, body {
+  scroll-behavior: smooth;
+}
+
+/* For Chrome, Safari, and Edge */
+body::-webkit-scrollbar {
+  display: none; /* Hides scrollbar */
+}
+
+body {
+  padding-top: 80px; /* Adjust based on your header height */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+/* Header styles */
+/* Fix Navigation Overflow */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Ensure full width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%; /* Reduce padding to prevent overflow */
+  background: white;
+  color: black;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  box-sizing: border-box; /* Prevent extra spacing issues */
+  overflow: hidden; /* Hide any extra content */
+}
+
+/* Logo styles */
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+}
+
+/* Navigation styles */
+header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px; /* Adjust spacing */
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  flex-wrap: wrap; /* Ensure wrapping on smaller screens */
+}
+
+header nav ul li {
+  display: inline;
+}
+
+header nav ul li a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+header nav ul li a:hover {
+  color: #007BFF; /* Hover effect */
+}
+
+/* Contact button styling */
+header nav ul li .contact-button {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 2px solid black;;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+header nav ul li .contact-button:hover {
+  background: black;
+  color: white;
+}
+
+ /* Hero Section */
+.hero { 
+  height:100vh; /* Full screen height */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  align-items: flex-start; /* Align content to the left */
+  justify-content: flex-start; /* Align content to the top */
+  text-align: left;
+  color: white;
+  position: relative;
+  padding: 0 10%; /* Adjust left padding for proper positioning */
+  background-image: url('./images/pexels-quang-nguyen-vinh-222549-2131784.jpg'); /* Ensure correct path */
+  background-size: cover;
+  background-position: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay for better readability */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px; /* Restrict text width */
+  margin-top: 30px; /* Optional: add some space from the top */
+}
+
+.hero h1 {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 18px;
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  border-bottom: 2px solid white; /* Underline effect */
+  transition: all 0.3s ease-in-out;
+}
+
+.cta-button:hover {
+  color: #f8f8f8;
+  border-bottom: 2px solid #f8f8f8;
+}
+
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 50px 10%;
+}
+
+.about-content {
+  max-width: 50%;
+}
+
+.about-content h1 {
+  color: green;
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.about-content p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.cta-link {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #007BFF;
+  text-decoration: none;
+  border-bottom: 2px solid #007BFF;
+  transition: all 0.3s ease-in-out;
+}
+
+.cta-link:hover {
+  color: #0056b3;
+  border-bottom: 2px solid #0056b3;
+}
+#about {
+  padding-top: 100px;/* Adjust based on header height */
+  margin-top: -70px;/* Compensate for sticky header */
+}
+.about-image img {
+  max-width: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 5%; /* Reduce padding for smaller screens */
+  }
+}
+@media (max-width: 1024px) {
+  .about-section {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .about-content {
+      max-width: 90%;
+  }
+
+  .about-image img {
+      max-width:80%;
+      margin-top: 20px;
+  }
+}
+  
+.products-section {
+  text-align: left; /* Align left like About Section */
+  padding: 70px 10%; /* Increased padding for better layout */
+  background: #f4f6f5; /* Light grey background */
+}
+
+.products-section h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: green; /* Matches About section */
+  text-transform: uppercase;
+}
+
+.products-section p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.slider-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.product-slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px; /* Increased gap for better spacing */
+  padding: 10px; /* Added padding to ensure slides are fully visible */
+}
+
+.product-slide {
+  flex: 0 0 calc(33.33% - 30px); /* Show exactly 3 slides fully */
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  text-align: left; /* Align text left */
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-slide:hover {
+  transform: translateY(-5px);
+}
+
+.product-slide img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.product-slide h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: green; /* Matches About section */
+  margin-top: 10px;
+
+}
+
+.product-slide p {
+  font-size: 14px;
+  color: #555;
+  margin-top: 5px;
+}
+
+/* Navigation Arrows */
+button.prev, button.next {
+  position: absolute;
+  top: 85%;
+  width: 3%; /* Each button covers half of the slider */
+  height:10%; /* Full height */
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0); /* Transparent */
+  border: 2px solid rgb(127, 255, 7);
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Make arrows visible on hover */
+button.prev:hover, button.next:hover {
+  background: rgba(18, 18, 18, 0.3);
+}
+
+button.prev {
+  left: 2%;
+}
+
+button.next {
+  right: 1%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .slider-container {
+    max-width: 95%;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-slide {
+    flex: 0 0 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 500px) {
+  .product-slide {
+    flex: 0 0 100%;
+  }
+}
+
+.contact-btn {
+  padding: 10px 20px;
+  border: 2px solid black;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+/* Contact Section */
+.contact-section {
+  text-align: center;
+  padding: 70px 10%;
+}
+
+.contact-section h4 {
+  color: green;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.contact-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+  max-width: 500px;
+  margin: auto;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight:100;
+  margin-top: 10px;
+  font-size: smaller;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Checkbox Container */
+.checkbox-container {
+  display: flex;
+  align-items: center;  /* Align checkbox and label properly */
+  gap: 5px;  /* Reduce spacing */
+  margin-top: 10px;
+}
+
+.checkbox-container input {
+  margin: 0; /* Remove extra margin */
+  width: 16px;  /* Adjust checkbox size */
+  height: 16px;
+}
+
+
+/* Submit Button */
+.submit-btn {
+  background: green;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: darkgreen;
+}
+  
+/* Blog Section Styling */
+.blog-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Individual Blog Article */
+.blog-posts article {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+.blog-posts article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Styling */
+.blog-posts article img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* Blog Title */
+.blog-posts article h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Blog Description */
+.blog-posts article p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* Read More Link */
+.blog-posts article a {
+  font-size: 16px;
+  font-weight: bold;
+  color: #007BFF;
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 2px solid #007BFF;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.blog-posts article a:hover {
+  color: #0056b3;
+  border-bottom: 2px solid #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .blog-posts {
+      grid-template-columns: 1fr;
+  }
+}
+
+
+/* Footer */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: #fff;
+  }
+  

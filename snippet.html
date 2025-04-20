@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live CSS Typewriter</title>
+    
+    <!-- Prism.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <style>
+/* General Styling */
+body {
+    background: #1e1e1e;
+    color: #fff;
+    font-family: "Fira Code", monospace;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Fixed Height Layout */
+.container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 1600px;
+    height: 80vh; /* Fixed height */
+    margin: auto;
+}
+
+/* Left Side: Output Window */
+.output-container {
+    flex: 2;
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); /* Neon Glow Effect */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    min-width: 350px;
+    overflow: hidden;
+    border: 2px solid rgba(0, 255, 255, 0.6);
+    position: relative;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Right Side: CSS Typewriter */
+.code-container {
+    flex: 1;
+    background: #181818;
+    padding: 5px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); /* Neon Glow Effect */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    min-width: 350px;
+    overflow: hidden;
+    border: 2px solid rgba(0, 255, 255, 0.6);
+    position: relative;
+}
+
+/* Title Bar for Code Container */
+.title-bar {
+    background: #007acc;
+    padding: 5px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+}
+
+/* Code Area */
+pre {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background: #1e1e1e;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    margin: 0;
+    border-radius: 5px;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(0, 255, 255, 0.6) rgba(30, 30, 30, 1); /* Track & Thumb color */
+}
+
+/* Chrome, Safari Scrollbar */
+pre::-webkit-scrollbar {
+    width: 8px; /* Thin scrollbar */
+}
+
+pre::-webkit-scrollbar-track {
+    background: rgba(30, 30, 30, 1); /* Dark background */
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+pre::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 255, 0.6); /* Glowing cyan */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 255, 1); /* Brighter glow on hover */
+}
+
+/* Code Text */
+code {
+    display: block;
+    white-space: pre-wrap;
+    color: #d4d4d4;
+}
+
+/* Smooth Scrolling */
+pre {
+    scroll-behavior: smooth;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        height: 90vh;
+    }
+
+    .output-container, .code-container {
+        width: 100%;
+        height: 50%;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Left Side: Large Output -->
+        <div class="output-container">
+            <iframe id="output-frame"></iframe>
+        </div>
+
+        <!-- Right Side: Small CSS Typewriter -->
+        <div class="code-container">
+            <div class="title-bar">styles.css</div>
+            <pre><code id="css-typing" class="language-css"></code></pre>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const htmlUrl = "index.html"; // Path to HTML file
+            const cssUrl = "styles.css"; // Path to CSS file
+
+            const cssTypingArea = document.getElementById("css-typing");
+            const iframe = document.getElementById("output-frame");
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+            try {
+                // Fetch HTML & CSS files
+                const [htmlResponse, cssResponse] = await Promise.all([
+                    fetch(htmlUrl),
+                    fetch(cssUrl),
+                ]);
+
+                const htmlCode = await htmlResponse.text();
+                const cssCode = await cssResponse.text();
+
+                let cssIndex = 0;
+                let typedCss = "";
+
+                // Load HTML instantly
+                iframeDoc.open();
+                iframeDoc.write(htmlCode);
+                iframeDoc.close();
+
+                function typeCSS() {
+                    if (cssIndex < cssCode.length) {
+                        typedCss += cssCode.charAt(cssIndex);
+                        cssIndex++;
+                        
+                        // Update CSS typing container with syntax highlighting
+                        cssTypingArea.innerHTML = Prism.highlight(typedCss, Prism.languages.css, "css");
+
+                        // Auto-scroll to bottom
+                        cssTypingArea.parentElement.scrollTop = cssTypingArea.parentElement.scrollHeight;
+
+                        // Apply CSS dynamically
+                        let newStyleTag = iframeDoc.createElement("style");
+                        newStyleTag.textContent = typedCss;
+                        iframeDoc.head.innerHTML = ""; // Remove old styles
+                        iframeDoc.head.appendChild(newStyleTag);
+
+                        setTimeout(typeCSS, 1); // Adjust typing speed
+                    }
+                }
+
+                typeCSS(); // Start typing CSS
+            } catch (error) {
+                console.error("Error fetching files:", error);
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,71 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Text Extractor with Gemini</title>
-  <style>
-    body { font-family: sans-serif; margin: 2rem; }
-    .preview { max-width: 300px; margin-top: 1rem; }
-    .output { margin-top: 2rem; white-space: pre-wrap; background: #f0f0f0; padding: 1rem; border-radius: 0.5rem; }
-    .form-section { margin-top: 2rem; }
-    .form-grid { display: grid; gap: 1rem; max-width: 500px; }
-    .form-group { display: flex; flex-direction: column; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroState - Home</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Image Text Extractor with Gemini</h1>
 
-  <form id="uploadForm">
-    <input type="file" accept="image/png, image/jpeg" required />
-    <button type="submit">Extract Text</button>
+  <header>
+    <div class="logo">AgroState</div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="product.html">Products</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="#contact" class="contact-button">Contact</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+        <h1>AgroState</h1>
+        <p>Get Personalized Crop Recommendations Based on Soil Quality</p>
+        <a href="product.html" class="cta-button">Get Recommendations</a>
+    </div>
+  </section>
+  
+
+  <!-- About Section (Now part of the homepage) -->
+<section id="about" class="about-section">
+  <div class="about-content">
+      <h1>DISCOVER SOILSMART</h1>
+      <p>Your personalized soil analysis and crop recommendation tool</p>
+      <p>
+        SoilSmart transforms the way you manage your soil and crop selection. Our easy-to-use platform offers a tailored 
+        experience where you can get detailed insights into your soil health and recommendations for the most suitable crops 
+        to plant based on soil data.
+      </p>
+      <p>
+        Whether you're a farmer or a gardening enthusiast, SoilSmart's advanced algorithms provide crop suggestions 
+        based on the unique characteristics of your soil, helping you achieve the best results for your land.
+      </p>
+      <a href="#contact" class="cta-link">Get in touch</a>
+  </div>
+  <div class="about-image">
+    <img src="pexels-binyaminmellish-169523.jpg" alt="Crane">
+</div>
+</section>
+<section id="contact" class="contact-section">
+  <h4>GET IN TOUCH</h4>
+  <h2>We're here to help you!</h2>
+  <form action="#" method="POST">
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" required placeholder="Jane Smith">
+
+      <label for="email">Email Address *</label>
+      <input type="email" id="email" name="email" required placeholder="email@website.com">
+
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" required placeholder="555-555-5555">
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <div class="checkbox-container">
+          <input type="checkbox" id="consent" name="consent" required>
+          <label for="consent">I allow this website to store my submission so they can respond to my inquiry. *</label>
+      </div>
+
+      <button type="submit" class="submit-btn">SUBMIT</button>
   </form>
+</section>
+  
+  
+  <footer>
+    <p>&copy; 2025 AgroState. All rights reserved.</p>
+  </footer>
+  <script>
+    // Product slider functionality
+    let index = 0;
 
-  <img class="preview" />
-  <div class="output">(Results will appear here)</div>
-  <button id="processDataBtn" style="display: none;">Process Information</button>
+    function slideProducts(direction) {
+        const slider = document.querySelector(".product-slider");
+        const slides = document.querySelectorAll(".product-slide");
+        const totalSlides = slides.length;
+        const visibleSlides = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3; // Responsive adjustments
 
-  <main>
-    <section class="form-section">
-      <form id="soilForm">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="state" id="labelState">State</label>
-            <input type="text" id="state" required />
-          </div>
-          <div class="form-group">
-            <label for="ph" id="labelPH">Soil pH</label>
-            <input type="number" id="ph" step="0.1" required min="0" max="14"/>
-          </div>
-          <div class="form-group">
-            <label for="nitrogen" id="labelNitrogen">Nitrogen (mg/kg)</label>
-            <input type="number" id="nitrogen" required/>
-          </div>
-          <div class="form-group">
-            <label for="phosphorus" id="labelPhosphorus">Phosphorus (mg/kg)</label>
-            <input type="number" id="phosphorus" required/>
-          </div>
-          <div class="form-group">
-            <label for="potassium" id="labelPotassium">Potassium (mg/kg)</label>
-            <input type="number" id="potassium" required/>
-          </div>
-          <div class="form-group">
-            <label for="organicMatter" id="labelOrganic">Organic Matter (%)</label>
-            <input type="number" id="organicMatter" step="0.1" required/>
-          </div>
-          <div class="form-group">
-            <label for="texture" id="labelTexture">Soil Type</label>
-            <input type="text" id="texture" required />
-          </div>
-          <div class="form-group">
-            <label for="recommendedCrop" id="labelCrop">Recommended Crop</label>
-            <input type="text" id="recommendedCrop" readonly />
-          </div>
-        </div>
-      </form>
-    </section>
-  </main>
+        index += direction;
 
-  <script type="module" src="/main.js"></script>
+        // Ensure index stays within bounds
+        if (index < 0) index = 0;
+        if (index > totalSlides - visibleSlides) index = totalSlides - visibleSlides;
+
+        const slideWidth = slides[0].offsetWidth + 20; // Include gap
+        slider.style.transition = "transform 0.5s ease-in-out";
+        slider.style.transform = `translateX(-${index * slideWidth}px)`;
+
+        // Show/hide navigation buttons
+        document.querySelector(".prev").style.display = index === 0 ? "none" : "block";
+        document.querySelector(".next").style.display = index === totalSlides - visibleSlides ? "none" : "block";
+    }
+
+    // Attach event listeners for slider navigation
+    document.querySelector(".prev").addEventListener("click", () => slideProducts(-1));
+    document.querySelector(".next").addEventListener("click", () => slideProducts(1));
+
+    // Show/hide left arrow on first load
+    document.querySelector(".prev").style.display = "none";
+
+    // Resize handling for better responsiveness
+    window.addEventListener("resize", () => {
+        slideProducts(0); // Adjust visible slides on resize
+    });
+  </script>
+  
+  
 </body>
 </html>

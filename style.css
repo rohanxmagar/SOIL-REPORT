@@ -1,116 +1,139 @@
-/* Reset some default browser styles */
+/* Base Styling */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Base body styles */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-  line-height: 1.6;
-}
-
-/* Container */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-/* Header */
-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-header h1 {
-  font-size: 2.2rem;
-  color: #2e8b57;
-}
-
-header p {
-  font-size: 1rem;
-  color: #666;
-  margin-top: 8px;
-}
-
-/* Form Section */
-.form-section {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Form Grid Layout */
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-/* Form Group */
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 10px 12px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #2e8b57;
-  outline: none;
-}
-
-/* Submit Button */
-button[type="submit"] {
-  background-color: #2e8b57;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  margin-top: 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #256d45;
-}
-
-/* Results Box */
-#results {
-  margin-top: 30px;
-  padding: 20px;
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-  background: #fdfdfd;
-}
-
-#results h2 {
-  color: #2e8b57;
-  margin-bottom: 10px;
-}
-
-#results ul {
-  list-style-type: disc;
-  margin-left: 20px;
-}
-
-#results p {
-  color: #555;
-}
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: #f8f9fa;
+    color: #212529;
+    padding: 20px;
+    line-height: 1.5;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+  
+  /* Language Selector */
+  .language-selector {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+  
+  .language-selector label {
+    margin-right: 10px;
+    font-weight: 500;
+  }
+  
+  select {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #ffffff;
+  }
+  
+  /* Form Section */
+  .form-section {
+    margin-top: 20px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+  
+  input[type="number"],
+  select {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border 0.3s ease;
+  }
+  
+  input[type="number"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #66afe9;
+  }
+  
+  /* Submit Button */
+  button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #218838;
+  }
+  
+  /* Navigation Button */
+  button[onclick] {
+    margin-top: 25px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button[onclick]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Results Styling */
+  #results {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #f1f3f5;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #343a40;
+  }
+  
